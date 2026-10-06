@@ -148,6 +148,7 @@ build_tar(){
 echo "Patching MediaTek audio Makefile..."
 sed -i 's/-Werror//g' "${WDIR}/kernel-5.10/sound/soc/mediatek/common/Makefile" || true
 sed -i 's/-Werror//g' "${WDIR}/kernel-5.10/drivers/gpu/drm/mediatek/mediatek_v2/Makefile" || true
+sed -i 's/-Werror//g' "${WDIR}/kernel-5.10/Makefile" || true
 
 # ========================================
 # MAIN EXECUTION
