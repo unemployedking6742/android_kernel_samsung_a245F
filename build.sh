@@ -54,48 +54,6 @@ mkdir -p "${WDIR}/custom_defconfigs"
 echo -e "CONFIG_LOCALVERSION_AUTO=n\nCONFIG_LOCALVERSION=\"-KKRT-${BUILD_KERNEL_VERSION}\"\n" > "${WDIR}/custom_defconfigs/version_defconfig"
 
 # ========================================
-# TELEGRAM: BUILD STARTED MESSAGE
-# ========================================
-send_build_started_telegram() {
-    # Kernel version from Makefile
-    local kernel_version
-    kernel_version=$(awk '/^VERSION/ {v=$3} /^PATCHLEVEL/ {p=$3} /^SUBLEVEL/ {s=$3} END {print v"."p"."s}' "${KERNEL_DIR}/Makefile")
-
-    # Git info
-    local branch last_commit
-    branch=$(git -C "${KERNEL_DIR}" rev-parse --abbrev-ref HEAD)
-    last_commit=$(git -C "${KERNEL_DIR}" log -1 --pretty=format:'%h - %s')
-
-    # Compose message
-    local message="🛠 Kernel Build Started
-Date: $(date '+%Y-%m-%d %H:%M:%S')
-Branch: ${branch}
-Last Commit: ${last_commit}
-Defconfig: ${DEFCONFIG}
-Kernel Version: ${kernel_version}
-"
-
-    # Send via Telegram
-    curl -s -X POST "https://api.telegram.org/bot${BOT_TOKEN}/sendMessage" \
-         -d chat_id="${G99_CHAT_ID}" \
-         -d text="${message}" \
-         -d parse_mode="Markdown" >/dev/null 2>&1
-}
-
-# Send build started message
-send_build_started_telegram
-
-# ========================================
-# GENERATE BUILD CONFIG
-# ========================================
-cd "${KERNEL_DIR}"
-python2 scripts/gen_build_config.py \
-    --kernel-defconfig "${DEFCONFIG}" \
-    --kernel-defconfig-overlays entry_level.config \
-    -m user \
-    -o "../out/target/product/a24/obj/KERNEL_OBJ/build.config"
-
-# ========================================
 # OEM BUILD VARIABLES
 # ========================================
 export ARCH=arm64
