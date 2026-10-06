@@ -117,8 +117,8 @@ fi
 # ========================================
 # FIX SAMSUNG HARDCODED ABI PATH
 # ========================================
-mkdir -p /home/dpi/qb5_8814/workspace/P4_1716/android/out/target/product/a24/obj/KERNEL_OBJ/kernel-5.10
-touch /home/dpi/qb5_8814/workspace/P4_1716/android/out/target/product/a24/obj/KERNEL_OBJ/kernel-5.10/abi_symbollist.raw
+sudo mkdir -p /home/dpi/qb5_8814/workspace/P4_1716/android/out/target/product/a24/obj/KERNEL_OBJ/kernel-5.10
+sudo touch /home/dpi/qb5_8814/workspace/P4_1716/android/out/target/product/a24/obj/KERNEL_OBJ/kernel-5.10/abi_symbollist.raw
 
 # ========================================
 # BUILD KERNEL
