@@ -65,7 +65,7 @@ export CROSS_COMPILE_COMPAT="arm-linux-gnueabi-"
 export OUT_DIR="../out/target/product/a24/obj/KERNEL_OBJ"
 export DIST_DIR="../out/target/product/a24/obj/KERNEL_OBJ"
 export BUILD_CONFIG="../out/target/product/a24/obj/KERNEL_OBJ/build.config"
-export MERGE_CONFIG="${KERNEL_DIR}/scripts/kconfig/merge_config.sh"
+export MERGE_CONFIG="${WDIR}/kernel-5.10/scripts/kconfig/merge_config.sh"
 
 # ========================================
 # FAILSAFE BUILD CONFIG
