@@ -65,6 +65,19 @@ export DIST_DIR="../out/target/product/a24/obj/KERNEL_OBJ"
 export BUILD_CONFIG="../out/target/product/a24/obj/KERNEL_OBJ/build.config"
 export MERGE_CONFIG="${KERNEL_DIR}/scripts/kconfig/merge_config.sh"
 
+# ========================================
+# FAILSAFE BUILD CONFIG
+# ========================================
+mkdir -p "${WDIR}/out/target/product/a24/obj/KERNEL_OBJ"
+if [ ! -f "${WDIR}/out/target/product/a24/obj/KERNEL_OBJ/build.config" ]; then
+    echo "Creating dummy build.config..."
+    cat > "${WDIR}/out/target/product/a24/obj/KERNEL_OBJ/build.config" <<EOF
+DEFCONFIG=a24_defconfig
+ARCH=arm64
+CROSS_COMPILE=aarch64-linux-gnu-
+EOF
+fi
+
 # Build options
 export GKI_KERNEL_BUILD_OPTIONS="
     SKIP_MRPROPER=1 \
