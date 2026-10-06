@@ -33,7 +33,7 @@ git submodule init && git submodule update
 if [ ! -f ".requirements" ]; then
     echo -e "\n[INFO]: INSTALLING REQUIREMENTS..!\n"
     sudo apt update
-    sudo apt install -y rsync python2 curl tar
+    sudo apt install -y rsync python3 curl tar
     touch .requirements
 fi
 
@@ -146,7 +146,7 @@ cd "${WDIR}/kernel"
 # ========================================
 
 build_kernel(){
-#    ( env ${GKI_KERNEL_BUILD_OPTIONS} ./build/build.sh || exit 1 ) && \
+    ( env ${GKI_KERNEL_BUILD_OPTIONS} ./build/build.sh || exit 1 ) && \
         ( cp "${WDIR}/out/target/product/a24/obj/KERNEL_OBJ/boot.img" "${WDIR}/dist" 
         cp "${WDIR}/out/target/product/a24/obj/KERNEL_OBJ/kernel-5.10/arch/arm64/boot/Image.gz" "${WDIR}/dist" )
 }
