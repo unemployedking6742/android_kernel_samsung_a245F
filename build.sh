@@ -85,7 +85,6 @@ export GKI_KERNEL_BUILD_OPTIONS="
     SKIP_MRPROPER=1 \
     KMI_SYMBOL_LIST_STRICT_MODE=0 \
     SKIP_ABI_CHECKS=1 \
-    KCFLAGS="-Wno-error" \
     ABI_DEFINITION= \
     BUILD_BOOT_IMG=1 \
     MKBOOTIMG_PATH=${WDIR}/mkbootimg/mkbootimg.py \
@@ -126,7 +125,7 @@ sudo touch /home/dpi/qb5_8814/workspace/P4_1716/android/out/target/product/a24/o
 # ========================================
 build_kernel(){
     cd "${WDIR}/kernel"
-    ( env ${GKI_KERNEL_BUILD_OPTIONS} ./build/build.sh || exit 1 )
+    ( env ${GKI_KERNEL_BUILD_OPTIONS} ( env ${GKI_KERNEL_BUILD_OPTIONS} KCFLAGS="-Wno-error" ./build/build.sh || exit 1 )
     cp "${WDIR}/out/target/product/a24/obj/KERNEL_OBJ/boot.img" "${WDIR}/dist" 2>/dev/null || true
     cp "${WDIR}/out/target/product/a24/obj/KERNEL_OBJ/kernel-5.10/arch/arm64/boot/Image.gz" "${WDIR}/dist" 2>/dev/null || true
     cd "${WDIR}"
