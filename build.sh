@@ -9,6 +9,8 @@ export WDIR="$(pwd)"
 export KERNEL_DIR="kernel-5.10"
 export DIST_DIR="${WDIR}/dist"
 export DEFCONFIG="a24_defconfig"
+export KCFLAGS="-Wno-error"
+export EXTRA_CFLAGS="-Wno-error"
 
 mkdir -p "${DIST_DIR}"
 
