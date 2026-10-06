@@ -6,7 +6,7 @@ set -x
 # REPO & KERNEL PATHS
 # ========================================
 export WDIR="$(pwd)"
-export KERNEL_DIR="${WDIR}/kernel-5.10"
+export KERNEL_DIR="kernel-5.10"
 export DIST_DIR="${WDIR}/dist"
 export DEFCONFIG="a24_defconfig"
 
@@ -141,6 +141,12 @@ build_tar(){
     echo -e "\n[INFO] Build Finished..!\n"
     cd "${WDIR}"
 }
+
+# ========================================
+# PATCH SPECIFIC MAKEFILES
+# ========================================
+echo "Patching MediaTek audio Makefile..."
+sed -i 's/-Werror//g' "${WDIR}/kernel-5.10/sound/soc/mediatek/common/Makefile" || true
 
 # ========================================
 # MAIN EXECUTION
