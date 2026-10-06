@@ -25,7 +25,7 @@ export BUILD_KERNEL_VERSION="${BUILD_KERNEL_VERSION:-Tanjiro-DEV}"
 # ========================================
 # INIT SUBMODULES
 # ========================================
-git submodule init && git submodule update
+git clone --depth=1 https://github.com/KernelSU-Next/KernelSU-Next.git KernelSU-Next
 
 # ========================================
 # INSTALL REQUIREMENTS
