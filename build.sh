@@ -146,7 +146,7 @@ build_tar(){
 # PATCH ALL MAKEFILES (SAFE)
 # ========================================
 echo "Patching all kernel Makefiles..."
-find "${WDIR}/kernel-5.10" -type f \( -name "Makefile" -o -name "Kbuild" -o -name "*.mk" \) -exec sed -i 's/ -Werror / /g' {} \; || true
+find "${WDIR}/kernel-5.10" -type f \( -name "Makefile" -o -name "Kbuild" -o -name "*.mk" \) -exec sed -i 's/-Werror[^ ]*//g' {} \; || true
 
 # ========================================
 # MAIN EXECUTION
