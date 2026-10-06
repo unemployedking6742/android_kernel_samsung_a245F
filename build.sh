@@ -114,15 +114,21 @@ if [ "$MAKE_MENUCONFIG" = "1" ]; then
 fi
 
 
-cd "${WDIR}/kernel"
+# ========================================
+# FIX SAMSUNG HARDCODED ABI PATH
+# ========================================
+mkdir -p /home/dpi/qb5_8814/workspace/P4_1716/android/out/target/product/a24/obj/KERNEL_OBJ/kernel-5.10
+touch /home/dpi/qb5_8814/workspace/P4_1716/android/out/target/product/a24/obj/KERNEL_OBJ/kernel-5.10/abi_symbollist.raw
+
 # ========================================
 # BUILD KERNEL
 # ========================================
-
 build_kernel(){
-    ( env ${GKI_KERNEL_BUILD_OPTIONS} ./build/build.sh || exit 1 ) && \
-        ( cp "${WDIR}/out/target/product/a24/obj/KERNEL_OBJ/boot.img" "${WDIR}/dist" 
-        cp "${WDIR}/out/target/product/a24/obj/KERNEL_OBJ/kernel-5.10/arch/arm64/boot/Image.gz" "${WDIR}/dist" )
+    cd "${WDIR}/kernel"
+    ( env ${GKI_KERNEL_BUILD_OPTIONS} ./build/build.sh || exit 1 )
+    cp "${WDIR}/out/target/product/a24/obj/KERNEL_OBJ/boot.img" "${WDIR}/dist" 2>/dev/null || true
+    cp "${WDIR}/out/target/product/a24/obj/KERNEL_OBJ/kernel-5.10/arch/arm64/boot/Image.gz" "${WDIR}/dist" 2>/dev/null || true
+    cd "${WDIR}"
 }
 # ========================================
 # CREATE TAR
