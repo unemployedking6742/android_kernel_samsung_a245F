@@ -127,7 +127,10 @@ sudo touch /home/dpi/qb5_8814/workspace/P4_1716/android/out/target/product/a24/o
 # ========================================
 build_kernel(){
     cd "${WDIR}/kernel"
-    ( env ${GKI_KERNEL_BUILD_OPTIONS} EXTRA_CFLAGS="-Wno-error" KCFLAGS="-Wno-error=stringop-overflow -Wno-error=array-bounds" ./build/build.sh || exit 1 )
+    ( env ${GKI_KERNEL_BUILD_OPTIONS} \
+    EXTRA_CFLAGS="-Wno-error" \
+    KCFLAGS="-Wno-error -Wno-error=format -Wno-error=return-type -Wno-error=stringop-overflow -Wno-error=array-bounds" \
+    ./build/build.sh || exit 1 )
     cp "${WDIR}/out/target/product/a24/obj/KERNEL_OBJ/boot.img" "${WDIR}/dist" 2>/dev/null || true
     cp "${WDIR}/out/target/product/a24/obj/KERNEL_OBJ/kernel-5.10/arch/arm64/boot/Image.gz" "${WDIR}/dist" 2>/dev/null || true
     cd "${WDIR}"
@@ -147,8 +150,9 @@ build_tar(){
 # ========================================
 # PATCH ALL MAKEFILES (SAFE)
 # ========================================
-echo "Patching all kernel Makefiles..."
-find "${WDIR}/kernel-5.10" -type f \( -name "Makefile" -o -name "Kbuild" -o -name "*.mk" \) -exec sed -i 's/ -Werror / /g' {} \; || true
+echo "Patching MediaTek audio Makefile..."
+sed -i 's/-Werror//g' "${WDIR}/kernel-5.10/sound/soc/mediatek/common/Makefile" || true
+sed -i 's/-Werror//g' "${WDIR}/kernel-5.10/drivers/gpu/drm/mediatek/mediatek_v2/Makefile" || true
 
 # ========================================
 # MAIN EXECUTION
