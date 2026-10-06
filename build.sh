@@ -33,7 +33,9 @@ git clone --depth=1 https://github.com/KernelSU-Next/KernelSU-Next.git KernelSU-
 if [ ! -f ".requirements" ]; then
     echo -e "\n[INFO]: INSTALLING REQUIREMENTS..!\n"
     sudo apt update
-    sudo apt install -y rsync python3 curl tar
+    sudo apt install -y rsync python3 curl tar bc bison build-essential \
+        ccache clang flex gcc-aarch64-linux-gnu gcc-arm-linux-gnueabi \
+        libelf-dev libssl-dev lld llvm make zip unzip
     touch .requirements
 fi
 
