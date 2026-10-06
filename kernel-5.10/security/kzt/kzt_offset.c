@@ -436,4 +436,5 @@ int kzt_offset_get_offsets(struct kzt_get_offsets_arg *arg)
 	case STRUCT_TYPE_NONE_END:
 		return -EPERM;
 	}
+	return -EINVAL;
 }
