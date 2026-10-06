@@ -123,9 +123,6 @@ sudo touch /home/dpi/qb5_8814/workspace/P4_1716/android/out/target/product/a24/o
 # ========================================
 # BUILD KERNEL
 # ========================================
-# ========================================
-# BUILD KERNEL
-# ========================================
 build_kernel(){
     cd "${WDIR}/kernel"
     ( env ${GKI_KERNEL_BUILD_OPTIONS} KCFLAGS="-Wno-error" ./build/build.sh || exit 1 )
@@ -150,21 +147,3 @@ build_tar(){
 # ========================================
 build_kernel
 build_tar
-# ========================================
-# CREATE TAR
-# ========================================
-build_tar(){
-    echo -e "\n[INFO] Creating an Odin flashable tar..\n"
-
-    cd "${WDIR}/dist"
-    tar -cvf "KernelSU-Next-SM-a245F-${BUILD_KERNEL_VERSION}.tar" boot.img && rm boot.img
-    echo -e "\n[INFO] Build Finished..!\n"
-    cd "${WDIR}"
-}
-
-# ========================================
-# MAIN EXECUTION
-# ========================================
-build_kernel
-build_tar
-
