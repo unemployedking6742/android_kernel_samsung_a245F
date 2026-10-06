@@ -85,7 +85,7 @@ export GKI_KERNEL_BUILD_OPTIONS="
     SKIP_MRPROPER=1 \
     KMI_SYMBOL_LIST_STRICT_MODE=0 \
     SKIP_ABI_CHECKS=1 \
-    KCFLAGS="-Wno-error=format" \
+    KCFLAGS="-Wno-error" \
     ABI_DEFINITION= \
     BUILD_BOOT_IMG=1 \
     MKBOOTIMG_PATH=${WDIR}/mkbootimg/mkbootimg.py \
