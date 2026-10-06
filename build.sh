@@ -121,13 +121,6 @@ sudo mkdir -p /home/dpi/qb5_8814/workspace/P4_1716/android/out/target/product/a2
 sudo touch /home/dpi/qb5_8814/workspace/P4_1716/android/out/target/product/a24/obj/KERNEL_OBJ/kernel-5.10/abi_symbollist.raw
 
 # ========================================
-# STRIP -Werror FROM KERNEL MAKEFILE
-# ========================================
-echo "Stripping -Werror from Makefiles..."
-find "${WDIR}/kernel-5.10" -name "Makefile" -exec sed -i 's/-Werror//g' {} \;
-find "${WDIR}/kernel" -name "Makefile" -exec sed -i 's/-Werror//g' {} \;
-
-# ========================================
 # BUILD KERNEL
 # ========================================
 build_kernel(){
